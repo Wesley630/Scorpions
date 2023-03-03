@@ -1,0 +1,65 @@
+---
+title: "zias data"
+author: "wesley"
+date: "2023-02-14"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r include=FALSE}
+require(tidyverse)
+require(tigerstats)
+mydata <- read.csv(file="zias data.csv")
+mydata$Scorpion_ID <- as.factor(mydata$Scorpion_ID)
+```
+
+#   anylysis of numprobes
+```{r}
+boxplot(NumProbes~Scorpion_ID,data=mydata)
+```
+
+The boxplot shows the high temperature scorpions lower than the low temperature scorpions. Numprobes represents the amount of times the scorpions were poked before they were agitated. scorpion placed in a  higher temperature were more prone to sting than those placed in lower temperatures.
+
+
+```{r}
+favstats(NumProbes~Scorpion_ID,data=mydata)
+```
+
+The average amount of probes from scorpions placed in higher temperatures is 6.5. the average amount of probes from scorpions placed in lower temperature is 23.5. scorpions in lower temperature were less prone to sting compared to those in high temperature.
+
+
+```{r}
+t.test(NumProbes~Scorpion_ID,data=mydata)
+```
+
+at 95% confidence level, there appears to be a difference between the scorpions placed in higher temperature and lower temperature
+
+
+
+```{r}
+boxplot(TimeSting~Scorpion_ID,data=mydata)
+```
+
+
+According to the plot, it took the scorpions placed in lower temperature more amount of time to sting compared to those placed in higher temperature.
+
+
+```{r}
+favstats(TimeSting~Scorpion_ID,data=mydata)
+```
+
+
+The scorpions placed in higher temperature took less time to sting compared to those in lower temperature. There is a difference in the mean, The standard deviation, and the median showed in the numerical results.
+
+
+
+
+```{r}
+t.test(TimeSting~Scorpion_ID,data=mydata,conf.level=.99)
+```
+
+
+At 98% confidence level, we can conclude that there is a difference between scorpions placed in lower and higher temperature. However at 95% and 99% confidence levels there is no difference between the scorpions.
